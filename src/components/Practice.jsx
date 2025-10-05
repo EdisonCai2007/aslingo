@@ -20,6 +20,7 @@ export default function Learning() {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [xp, setXp] = useState(0); 
 
   // Map English words to translated words
   const translatedWords = WORDS_ENG.map((w) => t(`words.${w}`));
@@ -160,6 +161,7 @@ export default function Learning() {
         (lbl || "").toLowerCase() === currentWord.word.toLowerCase()
       ) {
         setSuggestion("✓ Correct! Moving to next word...");
+        setXp(prev => prev + 10);
         setTimeout(() => {
           goToNextWord();
         }, 1000);
