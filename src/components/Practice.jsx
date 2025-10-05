@@ -152,14 +152,13 @@ export default function Learning() {
       } else if (st === "predicted" && conf < TARGET_CONF) {
         setSuggestion(`Close! Try to make the sign clearer. (${(conf * 100).toFixed(0)}%)`);
         axios.post("/api/gemini-feedback", {
-          label: lbl,
-          confidence: conf,
-          targetWord: currentWord.word
-        }).then(r => {
-          setGeminiFeedback(r.data.feedback);
-        }).catch(err => {
-          console.error("Gemini feedback error:", err);
-        });
+  label: lbl,
+  confidence: conf,
+  targetWord: currentWord.word
+})
+.then(r => setGeminiFeedback(r.data.feedback))
+.catch(err => console.error("Gemini feedback error:", err));
+
       } else {
         setSuggestion("");
       }

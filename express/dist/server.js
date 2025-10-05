@@ -28,13 +28,13 @@ const genAI = new GoogleGenerativeAI("AIzaSyBzIhAeIGNhaL-wqm3uDBNqdgdV_Iiy9ss");
 
 // ---------- Feedback Endpoint ----------
 app.post("/api/gemini-feedback", async (req, res) => {
-  const { target, results } = req.body;
+  const { label, confidence, targetWord } = req.body;
 
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
   const prompt = `
-  The user attempted the ASL gesture for "${target}".
-  Detected results: ${results}.
-  Give friendly, constructive feedback in 2–3 bullet points on how they can make their gestures look more like ${target} than ${results}.
+  The user attempted the ASL gesture for "${targetWord}".
+  Model predicted: "${label}" with ${(confidence * 100).toFixed(1)}% confidence.
+  Give friendly, constructive feedback in 2–3 bullet points.
   `;
 
   try {
@@ -46,6 +46,7 @@ app.post("/api/gemini-feedback", async (req, res) => {
     res.status(500).send("Error generating feedback");
   }
 });
+
 
 
 /*const DOMAIN = process.env.AUTH0_DOMAIN;
