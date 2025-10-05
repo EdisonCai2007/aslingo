@@ -348,6 +348,7 @@ export default function Learning() {
             fontSize: "16px"
           }}>
 
+            <strong>{suggestion}</strong>
             {geminiFeedback && (
   <div style={{
     marginTop: "15px",
@@ -360,7 +361,6 @@ export default function Learning() {
     💡 {geminiFeedback}
   </div>
 )}
-            <strong>{suggestion}</strong>
           </div>
         )}
 

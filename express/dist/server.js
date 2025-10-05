@@ -27,7 +27,7 @@ const genAI = new GoogleGenerativeAI("AIzaSyBzIhAeIGNhaL-wqm3uDBNqdgdV_Iiy9ss");
 
 
 // ---------- Feedback Endpoint ----------
-app.post("/api/feedback", async (req, res) => {
+app.post("/api/gemini-feedback", async (req, res) => {
   const { target, results } = req.body;
 
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
