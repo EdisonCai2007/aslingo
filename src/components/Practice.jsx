@@ -151,6 +151,7 @@ export default function Learning() {
         setSuggestion("Hold your sign steady...");
       } else if (st === "predicted" && conf < TARGET_CONF) {
         setSuggestion(`Close! Try to make the sign clearer. (${(conf * 100).toFixed(0)}%)`);
+        console.log("Requesting Gemini feedback...");
         axios.post("/api/gemini-feedback", {
   label: lbl,
   confidence: conf,
