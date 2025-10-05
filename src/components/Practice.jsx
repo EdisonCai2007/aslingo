@@ -151,7 +151,7 @@ export default function Learning() {
         setSuggestion("Hold your sign steady...");
       } else if (st === "predicted" && conf < TARGET_CONF) {
         setSuggestion(`Close! Try to make the sign clearer. (${(conf * 100).toFixed(0)}%)`);
-        axios.post("/gemini-feedback", {
+        axios.post("/api/gemini-feedback", {
   label: lbl,
   confidence: conf,
   targetWord: currentWord.word
@@ -171,7 +171,11 @@ export default function Learning() {
         (lbl || "").toLowerCase() === currentWord.word.toLowerCase()
       ) {
         setSuggestion("✓ Correct! Moving to next word...");
-        setXp(prev => prev + 10);
+        setXp(prev => {
+    const newXp = prev + 10;
+    localStorage.setItem("xp", newXp); // persist locally
+    return newXp;
+  });
         setTimeout(() => {
           goToNextWord();
         }, 1000);
