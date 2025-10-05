@@ -21,6 +21,7 @@ export default function Learning() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [xp, setXp] = useState(0); 
+  const [geminiFeedback, setGeminiFeedback] = useState("");
 
   // Map English words to translated words
   const translatedWords = WORDS_ENG.map((w) => t(`words.${w}`));
@@ -150,6 +151,15 @@ export default function Learning() {
         setSuggestion("Hold your sign steady...");
       } else if (st === "predicted" && conf < TARGET_CONF) {
         setSuggestion(`Close! Try to make the sign clearer. (${(conf * 100).toFixed(0)}%)`);
+        axios.post("/api/gemini-feedback", {
+          label: lbl,
+          confidence: conf,
+          targetWord: currentWord.word
+        }).then(r => {
+          setGeminiFeedback(r.data.feedback);
+        }).catch(err => {
+          console.error("Gemini feedback error:", err);
+        });
       } else {
         setSuggestion("");
       }
@@ -370,6 +380,18 @@ export default function Learning() {
           >
             Choose Different Word
           </button>
+          {geminiFeedback && (
+  <div style={{
+    marginTop: "15px",
+    padding: "12px",
+    background: "#e0f2fe",
+    border: "2px solid #0284c7",
+    borderRadius: "8px",
+    fontSize: "15px"
+  }}>
+    💡 {geminiFeedback}
+  </div>
+)}
         </div>
       </div>
     </div>
