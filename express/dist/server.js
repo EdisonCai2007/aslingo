@@ -38,15 +38,14 @@ app.post("/api/gemini-feedback", async (req, res) => {
   `;
 
   try {
-    const result = await model.generateContent(prompt);
-    const feedback = result.response.text();
+    const result = await model.generateText({ prompt, temperature: 0.7 });
+    const feedback = result.candidates[0].output;
     res.json({ feedback });
   } catch (err) {
     console.error("Feedback error:", err);
     res.status(500).send("Error generating feedback");
   }
 });
-
 
 
 /*const DOMAIN = process.env.AUTH0_DOMAIN;
