@@ -347,6 +347,19 @@ export default function Learning() {
             borderRadius: "8px",
             fontSize: "16px"
           }}>
+
+            {geminiFeedback && (
+  <div style={{
+    marginTop: "15px",
+    padding: "12px",
+    background: "#e0f2fe",
+    border: "2px solid #0284c7",
+    borderRadius: "8px",
+    fontSize: "15px"
+  }}>
+    💡 {geminiFeedback}
+  </div>
+)}
             <strong>{suggestion}</strong>
           </div>
         )}
@@ -380,18 +393,6 @@ export default function Learning() {
           >
             Choose Different Word
           </button>
-          {geminiFeedback && (
-  <div style={{
-    marginTop: "15px",
-    padding: "12px",
-    background: "#e0f2fe",
-    border: "2px solid #0284c7",
-    borderRadius: "8px",
-    fontSize: "15px"
-  }}>
-    💡 {geminiFeedback}
-  </div>
-)}
         </div>
       </div>
     </div>
