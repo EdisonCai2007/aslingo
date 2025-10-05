@@ -151,7 +151,7 @@ export default function Learning() {
         setSuggestion("Hold your sign steady...");
       } else if (st === "predicted" && conf < TARGET_CONF) {
         setSuggestion(`Close! Try to make the sign clearer. (${(conf * 100).toFixed(0)}%)`);
-        axios.post("https://aslingorecognitionai.onrender.com/gemini-feedback", {
+        axios.post("/gemini-feedback", {
   label: lbl,
   confidence: conf,
   targetWord: currentWord.word
