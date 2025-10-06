@@ -197,7 +197,7 @@ export default function Learning() {
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     captureAndSend();
-    intervalRef.current = setInterval(captureAndSend, 500);
+    intervalRef.current = setInterval(captureAndSend, 400);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
